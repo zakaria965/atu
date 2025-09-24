@@ -22,6 +22,9 @@
         <li class="nav-item">
           <a class="nav-link"  href="{{route('Books')}}"> Book List</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link"  href="{{route('Book.create')}}"> create from</a>
+        </li>
       </ul>
     </div>
   </div>

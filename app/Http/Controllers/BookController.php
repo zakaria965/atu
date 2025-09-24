@@ -8,7 +8,7 @@ class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
-     */
+     */ 
     public function index()
     {
         $Books = Book ::all();
@@ -20,7 +20,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('Books.create');
     }
 
     /**
@@ -28,31 +28,43 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 1. Validate input
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'author' => 'required|string|max:255',
+    ]);
+
+    Book::create($validated);
+
+    return redirect()->route('Books')->with('success', 'Book added successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        $book = Book::findOrFail($id);
+     return view('Books.edit', compact('book'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+         // 1. Validate input
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'author' => 'required|string|max:255',
+    ]);
+
+    // 2. Find book and update
+    $book = Book::findOrFail($id);
+    $book->update($validated);
+
+    // 3. Redirect back with success message
+    return redirect()->route('Books')->with('success', 'Book updated successfully!');
     }
 
     /**
@@ -60,6 +72,9 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+         $book = Book::findOrFail($id);
+         $book->delete();
+
+      return redirect()->route('Books')->with('success', 'Book deleted successfully!');
     }
 }
