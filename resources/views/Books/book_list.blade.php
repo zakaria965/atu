@@ -3,7 +3,7 @@
         <h2 class="mb-4 text-center">Book List</h2>
 
         <table class="table table-bordered table-striped table-hover">
-            <thead class="table-dark text-center">
+            <thead class="table-primary text-center">
                 <tr>
                     <th>#</th>
                     <th>Title</th>
